@@ -16,6 +16,33 @@ public int getLicense() {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	
+	
+	public void khSpecial() {
+		String str = "111222";
+		try {
+			Car[] carArr = new Car[3];
+			carArr[4].setPrice(5000);  		//ArrayIndexOutOfBoundsException
+			carArr[0].setPrice(5000);  		//NullPointerException
+			
+			int a = Integer.parseInt(str); 	//NumberFormatException
+			int c = 10 / 0 ;				//ArithmeticeException
+			c= 0/10;
+		}catch (NumberFormatException e ) {
+			System.out.println(Integer.MAX_VALUE+"까지");
+			e.printStackTrace();
+		}catch(ArithmeticException e) {
+			System.out.println("0으로 나눈수는 나타낼수없응");
+			e.printStackTrace();
+		}catch(NullPointerException e) {
+			System.out.println("0으로 나눈수는 나타낼수없응");
+			e.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("==========");
+	}
 	//	public void buy(Sonata c) {
 //		if(money > c.getPrice()) {
 //			System.out.println("구매확정");
@@ -27,7 +54,7 @@ public int getLicense() {
 //	}
 	public void buy(Car c) {
 		if(money > c.getPrice()) {
-			//((Avante)c).moveAvante();
+			((Avante)c).moveCar();
 			
 			if(c instanceof Sonata) {
 				//((Sonata)c).moveSonata();
