@@ -1,10 +1,18 @@
 package kh.lclass.oop.sample;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -101778373168041645L;
 	private String name;
 	private int age;
-	private char gender;
+	private transient char gender;
 	
+	/*녹색*/
+	/**파랑색 작성위치*/
 	public Person() {}
 	public Person(String name, int age, char gender) {
 		this.name = name;
