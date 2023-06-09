@@ -33,6 +33,7 @@ public class TestCollection {
 		objMap.put("hj", new Car(5000) );
 		System.out.println(objMap);
 		System.out.println(objMap.get("jy"));
+		
 		Set<String> keyset = objMap.keySet();
 		System.out.println(keyset);
 		System.out.println("=========");
