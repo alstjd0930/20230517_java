@@ -1,6 +1,6 @@
 package kh.lclass;
 
-import kh.lclass.exception.UserException;
+//import kh.lclass.exception.UserException;
 
 public class Main {
 

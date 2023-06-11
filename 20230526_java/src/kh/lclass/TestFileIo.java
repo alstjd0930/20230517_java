@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import kh.lclass.exception.UserException;
+//import kh.lclass.exception.UserException;
 import kh.lclass.oop.sample.Person;
 
 public class TestFileIo {
@@ -76,16 +76,16 @@ public class TestFileIo {
 		}
 	}
 
-	public void testRamda() throws UserException {
-		int[] arr = { 2, 3, 4 };
-		int[] arr2 = new int[] { 2, 3, 4 };
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-		if (arr.length > 2) {
-			throw new UserException("배열의 크기 줄여주세요");
-		}
-	}
+//	public void testRamda() throws UserException {
+//		int[] arr = { 2, 3, 4 };
+//		int[] arr2 = new int[] { 2, 3, 4 };
+//		for (int i = 0; i < arr.length; i++) {
+//			System.out.println(arr[i]);
+//		}
+//		if (arr.length > 2) {
+//			throw new UserException("배열의 크기 줄여주세요");
+//		}
+//	}
 
 	public void testFileReadData() {
 		String filePath = "D:/data2/test/aaa.txt";

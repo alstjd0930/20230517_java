@@ -6,8 +6,8 @@ import kh.lclass.oop.sample.Driver;
 public class Main {
 	public static void main(String[] args) {
 		//new TestCollection().testArrayList();
-		//new TestCollection().testHastset();
-		new TestFileIo().testFile();
+		new TestCollection().testHashMap();
+		//new TestFileIo().testFile();
 		//new TestCollection().testStack();
 //		TestCollection tc = new TestCollection();
 //		String str = tc.testGenneric(35.5);
