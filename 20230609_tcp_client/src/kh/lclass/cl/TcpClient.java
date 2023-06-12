@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class TcpClient {
 	
 	public void testTcpclient(String ip,int port) {
-		//1.
 		
 		
 		Socket socket = null;
@@ -29,22 +28,21 @@ public class TcpClient {
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
-			socket =new Socket(ip, port);
+			socket =new Socket(ip, port);	//2. 서버와의 입출력 스트림 오픈
 			System.out.println("접속성공");
 			
 			 in= socket.getInputStream();
 			 out=socket.getOutputStream();
 			
-			//6번
-			 br = new BufferedReader(new InputStreamReader(in));
+			 br = new BufferedReader(new InputStreamReader(in));	//보조스트림 통한 성능 개선
 			 wr = new PrintWriter(new OutputStreamWriter(out));
 			 
 			 
 			 String sendMsg =null;
 			 
 			 while(true){
-			 
-			 System.out.print("메세지");
+				 	//스트림을 통해 읽고 쓰기
+			 System.out.print("메세지");		
 			 sendMsg = stdIn.readLine();
 			 System.out.println("333"+sendMsg);
 			 
@@ -60,7 +58,7 @@ public class TcpClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
-			try {
+			try {			//통신 종료
 				if (stdIn != null) stdIn.close();
 				if (wr != null) wr.close();
 				if (br != null) br.close();
