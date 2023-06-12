@@ -8,12 +8,14 @@ import java.io.IOException;
 public class TxtHelloWorld {
 	public static void main(String[] args) {
 		try (FileWriter fw = new FileWriter("inputa.txt")) {
-			fw.write("hello world");
+			fw.write("hello world!!");
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("저장완료");
 	}
+	
 	
 	
 }
