@@ -27,6 +27,7 @@ public class TestFileIo {
 		try {
 			fos = new FileOutputStream(filePath);
 			oos = new ObjectOutputStream(fos);
+			
 			oos.writeObject(p1);
 			oos.writeObject(p2);
 			oos.flush();

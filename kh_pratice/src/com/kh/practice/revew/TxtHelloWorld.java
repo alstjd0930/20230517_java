@@ -1,27 +1,19 @@
 package com.kh.practice.revew;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class TxtHelloWorld {
 	public static void main(String[] args) {
-		FileInputStream fis = null;
-	
-			try {
-				fis = new FileInputStream("input.txt");
-				System.out.println(fis.read());
-			}catch(IOException e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					try {
-						fis.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}catch(NullPointerException e) {
-					e.printStackTrace();
-				}
-			}
+		try (FileWriter fw = new FileWriter("inputa.txt")) {
+			fw.write("hello world");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	
 }

@@ -38,12 +38,5 @@ public class TxtTest {
 		
 		
 		
-		
-		
-		
-	
-		
-		
-		
 	}
 }	

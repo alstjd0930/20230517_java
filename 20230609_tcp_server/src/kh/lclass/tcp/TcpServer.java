@@ -23,12 +23,15 @@ public class TcpServer {
 		try {
 	
 			ss = new ServerSocket(port); 	//서버소켓 객체생성
+			System.out.println("나의 ip"+ss.getInetAddress().toString());
+			System.out.println("나의 포트"+ss.getLocalPort());
 			
 		while(true) {		//반복문시작
 			System.out.println("접속대기중"); 		//3. 클라이언트 쪽에서 접속 요청이 오길 기다림
 			 sc =ss.accept();	//accept메소드 /sc 소켓을 ss로 선언한 객체에 대기 상태
-			System.out.println("접속됨"+sc.getLocalPort());	//접속됨을 알리는 문구작성
+			System.out.println("나의 포트 접속됨"+sc.getLocalPort());	//접속됨을 알리는 문구작성
 			System.out.println("접속됨"+sc.getPort());
+			System.out.println("클라이언트 포트"+sc.getInetAddress().toString());
 												//4. 접속 요청이 오면 요청 수락 후 해당 클라이언트에 대한 소켓 객체 생성
 			 in= sc.getInputStream();		
 			 out=sc.getOutputStream();			//5. 연결된 클라이언트와 입출력스트림 생성
