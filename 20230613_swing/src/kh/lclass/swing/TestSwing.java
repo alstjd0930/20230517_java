@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,6 +34,11 @@ public class TestSwing extends JFrame{
 		JTextField txtName1 = new JTextField();
 		JTextField txtName2 = new JTextField();
 		JTextField txtName3 = new JTextField();
+		JButton btnSave = new JButton("저장");
+		
+		//event = Action 리스너 달기
+		btnSave.addActionListener(new MyActionListner());
+		txtName.addActionListener(new MyActionListner());
 		
 		contentPane.add(new JLabel("이름"));
 		contentPane.add(txtName);
@@ -41,13 +48,34 @@ public class TestSwing extends JFrame{
 		contentPane.add(txtName2);
 		contentPane.add(new JLabel("과목"));
 		contentPane.add(txtName3);
-		
-		JButton btnSave = new JButton("저장");
 		contentPane.add(btnSave);
+		
 		setSize(300,300);
 		setVisible(true);
 	}
 	public static void main(String[] args) {
 		TestSwing frame = new TestSwing();
 	}
+}
+
+class MyActionListner implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("언제 호출");
+		System.out.println(e);
+		
+		Object source = e.getSource();
+		if(source instanceof JButton) {
+			System.out.println("button 누름");
+			if(((JButton)source).getText().equals("저장")) {
+				((JButton)source).setText("Save");
+			}else {
+				((JButton)source).setText("저장");
+			}
+		}else if(source instanceof JTextField) {
+			System.out.println("text 필드에서 enter");
+		}
+	}
+	
 }
