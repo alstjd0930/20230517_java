@@ -46,6 +46,9 @@ FROM employee
 where substr(phone,1,3)!=010;
 --14. EMPLOYEE테이블에서 메일주소 '_'의 앞이 4자이면서 DEPT_CODE가 D9 또는 D6이고 고용일이 90/01/01 ~ 00/12/01이고, 급여가 270만 이상인 사원의 전체를 조회
 --15. EMPLOYEE테이블에서 사원 명과 직원의 주민번호를 이용하여 생년, 생월, 생일 조회
+--16. EMPLOYEE테이블에서 사원명, 주민번호 조회 (단, 주민번호는 생년월일만 보이게 하고, '-'다음 값은 '*'로 바꾸기)
+SELECT emp_name,rpad(rpad(emp_no,7,'*'),14,'*')
+FROM employee;
 
 
 --1. 70년대 생(1970~1979) 중 여자이면서 전씨인 사원의 이름과 주민번호, 부서 명, 직급 조회
@@ -76,7 +79,7 @@ FROM EMPLOYEE
 CROSS JOIN DEPARTMENT;
 
 
---‘전’씨 성을 가진 직원 이름과 급여 조회
+--'전'씨 성을 가진 직원 이름과 급여 조회
 SELECT  emp_name, salary
 FROM employee
 where emp_name like '전%';
@@ -86,7 +89,7 @@ SELECT  emp_name, phone
 FROM employee
 where phone like '___7%';
 
---‘이’씨 성이 아닌 직원 사번, 이름, 이메일 조회
+--'이'씨 성이 아닌 직원 사번, 이름, 이메일 조회
 SELECT  emp_id, emp_name, email
 FROM employee
 where not emp_name like '이%';
@@ -101,7 +104,7 @@ SELECT  emp_name, dept_code, salary
 FROM employee
 where dept_code in ('D6','D8');
 
---‘J2’ 또는 ‘J7’ 직급 코드 중 급여를 2000000보다 많이 받는 직원의 이름, 급여, 직급코드 조회
+--'J2' 또는 'J7' 직급 코드 중 급여를 2000000보다 많이 받는 직원의 이름, 급여, 직급코드 조회
 SELECT  emp_name, dept_code, salary
 FROM employee
 where (job_code='J2' or job_code='J7')and salary > 2000000;
@@ -149,4 +152,125 @@ ORDER BY SALARY DESC)
 SELECT ROWNUM, EMP_NAME, SALARY
 FROM TOPN_SAL;
 
+CREATE TABLE USER_NOTNULL(
+    USER_NO NUMBER NOT NULL,
+    USER_ID VARCHAR2(20) NOT NULL,
+    USER_PWD VARCHAR2(30) NOT NULL,
+    USER_NAME VARCHAR2(30),
+    GENDER VARCHAR2(10),
+    PHONE VARCHAR2(30),
+    EMAIL VARCHAR2(50)
+);
+INSERT INTO USER_NOTNULL VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678','hong123@kh.or.kr');
+INSERT INTO USER_NOTNULL VALUES(2, NULL, NULL, NULL, NULL, '010-1234-5678','hong123@kh.or.kr');
 
+CREATE TABLE USER_UNIQUE(
+USER_NO NUMBER,
+USER_ID VARCHAR2(20) UNIQUE,
+USER_PWD VARCHAR2(30) NOT NULL,
+USER_NAME VARCHAR2(30),
+GENDER VARCHAR2(10),
+PHONE VARCHAR2(30),
+EMAIL VARCHAR2(50)
+);
+INSERT INTO USER_UNIQUE VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678','hong123@kh.or.kr');
+INSERT INTO USER_UNIQUE VALUES(1, 'user01', 'pass01', NULL, NULL, '010-1234-5678','hong123@kh.or.kr');
+
+INSERT INTO EMPLOYEE
+VALUES(900, '장채현', '901123-1080503', 'jang_ch@kh.or.kr', '01055569512', 'D1', 'J8',
+'S3', 4300000, 0.2, '200', SYSDATE, NULL, DEFAULT);
+
+CREATE TABLE USER_PRIMARYKEY2(
+USER_NO NUMBER,
+USER_ID VARCHAR2(20),
+USER_PWD VARCHAR2(30) NOT NULL,
+USER_NAME VARCHAR2(30),
+GENDER VARCHAR2(10),
+PHONE VARCHAR2(30),
+EMAIL VARCHAR2(50),
+PRIMARY KEY (USER_NO, USER_ID)--두 컬럼을 묶어 한 PRIMARY KEY 제약조건 설정
+
+);
+ALTER TABLE DEPT_COPY
+ADD (CNAME VARCHAR2(20));
+ALTER TABLE DEPT_COPY
+ADD (LNAME VARCHAR2(40) DEFAULT '한국');
+
+ALTER TABLE DEPT_COPY
+ADD CONSTRAINT DCOPY_DID_PK PRIMARY KEY(DEPT_ID);
+ADD CONSTRAINT DCOPY_DTITLE_UNQ UNIQUE(DEPT_TITLE);
+MODIFY LNAME CONSTRAINT DCOPY_LNAME_NN NOT NULL;
+SELECT UC.CONSTRAINT_NAME,
+UC.CONSTRAINT_TYPE,
+UC.TABLE_NAME,
+UCC.COLUMN_NAME,
+UC.SEARCH_CONDITION
+FROM USER_CONSTRAINTS UC
+JOIN USER_CONS_COLUMNS UCC ON (UC.CONSTRAINT_NAME = UCC.CONSTRAINT_NAME)
+WHERE UC.TABLE_NAME = 'DEPT_COPY';
+
+CREATE OR REPLACE VIEW V_EMPLOYEE
+AS SELECT EMP_ID, EMP_NAME, DEPT_TITLE, NATIONAL_NAME
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT ON(DEPT_ID = DEPT_CODE)
+LEFT JOIN LOCATION ON(LOCATION_ID = LOCAL_CODE)
+LEFT JOIN NATIONAL USING(NATIONAL_CODE);
+
+SELECT * FROM V_EMPLOYEE;
+SELECT * FROM  V_EMP_JOB;
+
+CREATE OR REPLACE VIEW V_EMP_JOB(사번, 이름, 직급, 성별, 근무년수)
+AS SELECT EMP_ID, EMP_NAME, JOB_NAME,
+
+DECODE(SUBSTR(EMP_NO, 8, 1), 1, '남', 2, '여'),
+EXTRACT(YEAR FROM SYSDATE) – EXTRACT(YEAR FROM HIRE_DATE)
+
+FROM EMPLOYEE
+JOIN JOB USING(JOB_CODE);
+
+------------------------------
+select *
+from TB_DEPARTMENT;
+
+select *
+from TB_CLASS;
+
+select *
+from TB_PROFESSOR;
+
+select *
+from TB_CLASS_PROFESSOR;
+
+select *
+from TB_STUDENT;
+
+select *
+from TB_GRADE;
+--1
+select department_name, category
+from tb_department;
+--2
+--3
+select student_name 
+from TB_STUDENT
+where department_no = 001 and absence_yn='Y' and substr(student_ssn,8,1)=2
+;
+--4
+select student_name
+from tb_student
+where student_no in('A513079','A513090','A513091','A513110','A513119')
+;
+--5
+select department_name, category
+from tb_department
+where capacity <= 30 and   capacity >= 20
+;
+--6
+select department_name, category
+from tb_department
+where capacity <= 30 and   capacity >= 20
+;
+select professor_name
+from tb_professor
+where department_no is null
+;
