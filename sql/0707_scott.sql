@@ -271,7 +271,13 @@ where deptno=20
 ;
 --Q. 9 GRADE별로 급여을 가장 작은 사원명을 조회
 --Q. 10.GRADE별로 가장 많은 급여, 가장 작은 급여, 평균 급여를 조회
-
+select sal.grade, min(e.sal),max(e.sal),floor(avg(e.sal))
+from emp e, salgrade sal
+where losal<=e.sal and sal.hisal>=e.sal
+group by sal.grade
+;
+--Q. 11
+--Q. 12
 --insert into emp (컬럼명1, 컬럼명2, ...) values(값1, 값2);
 desc emp;
 insert into emp ( ename, empno, job, mgr, hiredate, deptno)
@@ -294,3 +300,26 @@ update emp
 --20번 부서에 신입사원 EJ3 (8008),EJ4 추가
 insert into emp(ename, empno,deptno) values('EJ3',8008,50);
 insert into emp(ename, empno,deptno) values('EJ4',8009,50);
+
+select deptno, empno,sal , sum(sal) sumsal
+from emp;
+
+select deptno, empno, ename, sal, 
+    rank() over(order by sal asc) ranksal
+    from emp;
+select deptno, empno, ename, sal,
+rn ranksal 
+from (select rownum rn, t1.* from(select deptno, empno, ename, sal from emp order by sal asc)t1);
+
+select ename, sal
+    ,CUME_DIST() over(order by sal) sal_cume_dist
+from emp
+where deptno=30;
+
+--그룹함수 사용하지 않고 deptno를 묶어서 sum
+SELECT deptno
+, empno
+, sal
+, SUM(sal) OVER(PARTITION BY deptno) s_sal
+FROM emp;
+
