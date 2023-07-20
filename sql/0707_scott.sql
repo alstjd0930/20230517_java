@@ -234,7 +234,7 @@ select empno, ename 사원명, job, hiredate , sal, deptno
 from emp
 where deptno=20
 ;
-
+SELECT * FROM USER_SOURCE;
 --그룹by 시 select에서 사용하는 컬럼이나 그룹 함수만 사용가능
 --Q. 3 DEPTNO가 20,30인 부서 사람들의 등급별 평균연봉
 select sa.grade, avg(sal*12+nvl(comm,0)) "평균연봉"
