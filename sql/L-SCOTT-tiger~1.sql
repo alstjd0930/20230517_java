@@ -268,7 +268,6 @@ FROM tb_student;
 INSERT INTO tb_student VALUES('A484076', '026', '차지수', '860930-1106355', '전주시 완산구 전동 140-1 전북매일신문', to_date('01-03-2004', 'dd-mm-yyyy'), 'N', 'P010');
 
 
-
 --CREATE OR REPLACE TRIGGER TRG_03
 --AFTER INSERT
 --ON EMPLOYEE
@@ -284,4 +283,9 @@ INSERT INTO tb_student VALUES('A484076', '026', '차지수', '860930-1106355', '
 --'S5', 3000000, 0.1, 200, SYSDATE, NULL,
 --DEFAULT);
 
-
+--테이블 값변경
+--alter table 테이블명 rename column 컬럼명 to 바꿀명
+--alter table 테이블명 modify 자료형 to 바꿀 자료형
+--dml - 인서트문 등등
+--ddl - sql 테이블 
+--desc tb_student

@@ -4,7 +4,8 @@ SELECT    * FROM JOB;
 SELECT    * FROM location;
 SELECT    * FROM national;
 SELECT    * FROM sal_grade;
-
+select * from tb_student;
+desc tb_student;
 --실습
 --1. JOB 테이블의 모든 정보 조회
 SELECT    * FROM JOB;
