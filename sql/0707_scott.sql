@@ -9,6 +9,9 @@ SELECT *
 FROM salgrade
 ;
 
+select *
+from tb_student
+;
 
 select empno, ename, sal --3. 무슨 열 추출
 from emp    --1. 무슨 테이블 선택
