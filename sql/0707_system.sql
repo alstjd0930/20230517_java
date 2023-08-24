@@ -4,9 +4,17 @@ select * from user_tables;
 CREATE user c##scott IDENTIFIED by tiger;
 drop user c##scott;
 
+
 alter SESSION set "_ORACLE_SCRIPT"=true;
 CREATE user kh IDENTIFIED by kh;
 CREATE user scott IDENTIFIED by tiger;
+
+CREATE USER KHL IDENTIFIED BY KHL;
+GRANT CONNECT, RESOURCE, DBA TO KHL;
+
+CREATE USER KM IDENTIFIED BY KM;
+GRANT CONNECT, RESOURCE, DBA TO KM;
+
 
 GRANT connect,resource to c##scott;
 GRANT connect,resource to kh; 
