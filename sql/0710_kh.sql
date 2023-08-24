@@ -54,7 +54,10 @@ where substr(phone,1,3)!=010;
 SELECT emp_name,rpad(rpad(emp_no,7,'*'),14,'*')
 FROM employee;
 
-
+select *
+from SYSTEM.tb_student
+;
+desc system.tb_student;
 --1. 70년대 생(1970~1979) 중 여자이면서 전씨인 사원의 이름과 주민번호, 부서 명, 직급 조회
 SELECT   emp_name,instr(emp_no,1,2),dept_code,job_code 
 FROM employee;
