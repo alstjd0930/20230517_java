@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 @Component
 public class AttachFileVo {
-	private int bno ;
-	private String filepate;
+	private int bno;
+	private String filepath;
 	private String fileno;
-	
+
 }

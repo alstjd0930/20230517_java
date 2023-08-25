@@ -16,26 +16,26 @@ public class BoardService {
 	private BoardDao boardao;
 	
 	
-	public List<BoardVo> selectlist(){
+	public List<BoardVo> selectlist() throws Exception{
 		return boardao.selectList() ;
 	}
 	
-	public int  insert(BoardVo vo){
+	public int  insert(BoardVo vo) throws Exception{
 		return boardao.insert(vo); 
 	}
 	
-	public int  update(BoardVo vo){
+	public int  update(BoardVo vo) throws Exception{
 		return boardao.update(vo); 
 	}
 	
-	public int  delete(int bno){
+	public int  delete(int bno) throws Exception{
 		return boardao.delete(bno);
 	}
-	public List<BoardVo>  selectOne(int bno){
+	public List<BoardVo>  selectOne(int bno) throws Exception{
 		return boardao.selectOne(bno);
 	}
 	@Transactional
-	public int  insertReply(BoardVo vo){
+	public int  insertReply(BoardVo vo)throws Exception{
 		boardao.update(vo);
 		return boardao.insert(vo);
 	}

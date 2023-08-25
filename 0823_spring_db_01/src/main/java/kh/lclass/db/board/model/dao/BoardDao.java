@@ -15,22 +15,22 @@ public class BoardDao {
 	private SqlSession sqlSession;
 	
 	
-	public List<BoardVo> selectList(){
+	public List<BoardVo> selectList() throws Exception{
 		return sqlSession.selectList("board.boardselectlist"); 
 	}
 	
-	public int  insert(BoardVo vo){
+	public int  insert(BoardVo vo)throws Exception{
 		return sqlSession.insert("board.insert" ,vo); 
 	}
 	
-	public int  update(BoardVo vo){
+	public int  update(BoardVo vo)throws Exception{
 		return sqlSession.update("board.update" , vo); 
 	}
 	
-	public int  delete(int bno){
+	public int  delete(int bno)throws Exception{
 		return sqlSession.delete("board.delete" , bno); 
 	}
-	public List<BoardVo> selectOne(int bno){
-		return sqlSession.selectOne("board.selectOnet",bno); 
+	public List<BoardVo> selectOne(int bno)throws Exception{
+		return sqlSession.selectOne("board.boardselectone",bno); 
 	}
 }
